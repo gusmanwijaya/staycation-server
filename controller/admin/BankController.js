@@ -36,8 +36,6 @@ module.exports = {
       const { bankName, bankAccountNumber, bankAccountName } = req.body;
 
       if (req.file) {
-        console.log("file : ", req.file);
-        console.log("rootPath : ", config.rootPath);
         const filePath = req.file.path;
         const originalExtension =
           req.file.originalname.split(".")[

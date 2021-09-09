@@ -26,12 +26,10 @@ const itemSchema = new mongoose.Schema(
       type: String,
       required: [true, "Item description is required"],
     },
-    categoryId: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Category",
-      },
-    ],
+    categoryId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+    },
     imageId: [
       {
         type: mongoose.Schema.Types.ObjectId,
