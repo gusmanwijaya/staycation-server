@@ -6,6 +6,12 @@ const categorySchema = new mongoose.Schema(
       type: String,
       required: [true, "Category name is required"],
     },
+    itemId: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Item",
+      },
+    ],
   },
   {
     timestamps: {

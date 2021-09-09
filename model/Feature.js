@@ -14,6 +14,12 @@ const featureSchema = new mongoose.Schema(
       type: String,
       required: [true, "Feature image is required"],
     },
+    itemId: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Item",
+      },
+    ],
   },
   {
     timestamps: {

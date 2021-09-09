@@ -18,6 +18,12 @@ const activitySchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    itemId: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Item",
+      },
+    ],
   },
   {
     timestamps: {
