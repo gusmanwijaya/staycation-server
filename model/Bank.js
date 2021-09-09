@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const momentTimezone = require("moment-timezone");
 
 const bankSchema = new mongoose.Schema(
   {
@@ -15,10 +14,13 @@ const bankSchema = new mongoose.Schema(
       type: String,
       required: [true, "Bank account name is required"],
     },
+    imageUrl: {
+      type: String,
+      required: [true, "Bank image is required"],
+    },
   },
   {
     timestamps: {
-      currentTime: () => momentTimezone.tz.setDefault("Asia/Jakarta"),
       createdAt: "created_at",
       updatedAt: "updated_at",
     },

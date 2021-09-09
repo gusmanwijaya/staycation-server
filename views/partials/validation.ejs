@@ -1,0 +1,8 @@
+<% if (alert.status != "") { %>
+    <div class="alert alert-<%= alert.status %> alert-dismissible">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+        &times;
+      </button>
+      <i class="icon fas fa-<%= alert.status == "success" ? "check" : alert.status == "danger" ? "ban" : "" %>"></i> <%= alert.message %>
+    </div>
+<% } %>

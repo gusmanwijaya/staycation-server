@@ -1,0 +1,82 @@
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="editModal"
+  tabindex="-1"
+  aria-labelledby="editModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel">Edit Bank</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form
+        action="/bank/update?_method=PUT"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="bankName">Bank Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="bankName"
+              name="bankName"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="bankAccountNumber">Bank Account Number</label>
+            <input
+              type="number"
+              class="form-control"
+              id="bankAccountNumber"
+              name="bankAccountNumber"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="bankAccountName">Bank Account Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="bankAccountName"
+              name="bankAccountName"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="imageUrl">Upload Image</label>
+            <input
+              type="file"
+              class="form-control"
+              id="imageUrl"
+              name="imageUrl"
+              accept="image/*"
+              required
+            />
+            <br />
+            <img src="" alt="" id="preview" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <input type="hidden" id="id" name="id" />
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+          <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

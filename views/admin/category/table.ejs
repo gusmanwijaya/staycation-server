@@ -1,7 +1,15 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">Data Category</h6>
+    <!-- Button trigger modal -->
+    <button
+      type="button"
+      class="btn btn-primary btn-sm"
+      data-toggle="modal"
+      data-target="#addModal"
+    >
+      <i class="fas fa-plus"> Add</i>
+    </button>
   </div>
   <div class="card-body">
     <div class="table-responsive">
@@ -18,7 +26,37 @@
             <th>Action</th>
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+          <% for( let index = 0; index < categories.length; index++ ) { %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= categories[index].name %></td>
+            <td>
+              <div class="row" style="padding-left: 6px">
+                <button
+                  data-toggle="modal"
+                  data-target="#editModal"
+                  id="btnEditModal"
+                  type="button"
+                  class="btn btn-warning btn-sm mr-1"
+                  data-id="<%= categories[index]._id %>"
+                  data-name="<%= categories[index].name %>"
+                >
+                  <i class="fas fa-pencil-alt"></i> Edit
+                </button>
+                <form
+                  action="/category/destroy/<%= categories[index]._id %>?_method=DELETE"
+                  method="POST"
+                >
+                  <button class="btn btn-danger btn-sm">
+                    <i class="fas fa-trash"></i> Delete
+                  </button>
+                </form>
+              </div>
+            </td>
+          </tr>
+          <% } %>
+        </tbody>
       </table>
     </div>
   </div>

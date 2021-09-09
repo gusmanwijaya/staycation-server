@@ -17,6 +17,8 @@
 
           <!-- Begin Page Content -->
           <div class="container-fluid">
+            <% include ../../partials/validation.ejs %>
+
             <!-- Page Heading -->
             <h1 class="h3 mb-4 text-gray-800">Bank</h1>
 
@@ -37,7 +39,39 @@
       <i class="fas fa-angle-up"></i>
     </a>
 
-    <% include ../../partials/logoutModal.ejs %> <% include
-    ../../partials/script.ejs %>
+    <% include ./edit_modal.ejs %> <% include ./create_modal.ejs %> <% include
+    ../../partials/logoutModal.ejs %> <% include ../../partials/script.ejs %>
+
+    <script>
+      $("#dataTable").on("click", "#btnEditModal", function () {
+        let id = $(this).data("id");
+        let bankName = $(this).data("bankname");
+        let bankAccountNumber = $(this).data("bankaccountnumber");
+        let bankAccountName = $(this).data("bankaccountname");
+
+        $("#editModal").modal("show");
+        $("#id").val(id);
+        $("#bankName").val(bankName);
+        $("#bankAccountNumber").val(bankAccountNumber);
+        $("#bankAccountName").val(bankAccountName);
+      });
+    </script>
+
+    <script>
+      function readUrl(input) {
+        if (input.files && input.files[0]) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            $("#preview").attr("src", e.target.result);
+            $("#preview").attr("width", "20%");
+            $("#preview").attr("height", "20%");
+          };
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+      $("#imageUrl").change(function () {
+        readUrl(this);
+      });
+    </script>
   </body>
 </html>

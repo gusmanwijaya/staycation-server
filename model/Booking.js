@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const momentTimezone = require("moment-timezone");
 
 const bookingSchema = new mongoose.Schema(
   {
@@ -62,7 +61,6 @@ const bookingSchema = new mongoose.Schema(
   },
   {
     timestamps: {
-      currentTime: () => momentTimezone.tz.setDefault("Asia/Jakarta"),
       createdAt: "created_at",
       updatedAt: "updated_at",
     },

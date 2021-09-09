@@ -1,7 +1,15 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">Data Bank</h6>
+    <!-- Button trigger modal -->
+    <button
+      type="button"
+      class="btn btn-primary btn-sm"
+      data-toggle="modal"
+      data-target="#addModal"
+    >
+      <i class="fas fa-plus"> Add</i>
+    </button>
   </div>
   <div class="card-body">
     <div class="table-responsive">
@@ -14,13 +22,55 @@
         <thead>
           <tr>
             <th>No</th>
+            <th>Image</th>
             <th>Bank Name</th>
             <th>Bank Account Number</th>
             <th>Bank Account Name</th>
             <th>Action</th>
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+          <% for( let index = 0; index < banks.length; index++ ) { %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td>
+              <img
+                src="http://localhost:3001/uploads/<%= banks[index].imageUrl %>"
+                alt="<%= banks[index].bankName %>"
+                style="width: 50px; height: auto"
+              />
+            </td>
+            <td><%= banks[index].bankName %></td>
+            <td><%= banks[index].bankAccountNumber %></td>
+            <td><%= banks[index].bankAccountName %></td>
+            <td>
+              <div class="row" style="padding-left: 6px">
+                <button
+                  data-toggle="modal"
+                  data-target="#editModal"
+                  id="btnEditModal"
+                  type="button"
+                  class="btn btn-warning btn-sm mr-1"
+                  data-id="<%= banks[index]._id %>"
+                  data-bankname="<%= banks[index].bankName %>"
+                  data-bankaccountnumber="<%= banks[index].bankAccountNumber %>"
+                  data-bankaccountname="<%= banks[index].bankAccountName %>"
+                >
+                  <i class="fas fa-pencil-alt"></i> Edit
+                </button>
+                <form
+                  action="/bank/destroy/<%= banks[index]._id %>?_method=DELETE"
+                  method="POST"
+                >
+                  <button class="btn btn-danger btn-sm">
+                    <i class="fas fa-trash"></i> Delete
+                  </button>
+                </form>
+              </div>
+            </td>
+          </tr>
+          <% } %>
+        </tbody>
       </table>
     </div>
   </div>

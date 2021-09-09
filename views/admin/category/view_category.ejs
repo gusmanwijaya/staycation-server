@@ -17,6 +17,8 @@
 
           <!-- Begin Page Content -->
           <div class="container-fluid">
+            <% include ../../partials/validation.ejs %>
+
             <!-- Page Heading -->
             <h1 class="h3 mb-4 text-gray-800">Category</h1>
 
@@ -37,7 +39,17 @@
       <i class="fas fa-angle-up"></i>
     </a>
 
-    <% include ../../partials/logoutModal.ejs %> <% include
-    ../../partials/script.ejs %>
+    <% include ./edit_modal.ejs %> <% include ./create_modal.ejs %> <% include
+    ../../partials/logoutModal.ejs%> <% include ../../partials/script.ejs %>
+
+    <script>
+      $("#dataTable").on("click", "#btnEditModal", function () {
+        let id = $(this).data("id");
+        let name = $(this).data("name");
+        $("#editModal").modal("show");
+        $("#id").val(id);
+        $("#name").val(name);
+      });
+    </script>
   </body>
 </html>
