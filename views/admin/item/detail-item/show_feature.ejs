@@ -1,0 +1,123 @@
+<div
+  class="tab-pane fade show active"
+  id="show-feature"
+  role="tabpanel"
+  aria-labelledby="show-tab"
+>
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4 mt-2">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Data Feature</h6>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-5">
+          <form
+            action="/item/store/feature"
+            method="POST"
+            enctype="multipart/form-data"
+          >
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="qty">Quantity</label>
+              <input
+                type="number"
+                class="form-control"
+                id="qty"
+                name="qty"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="imageUrl">Upload Image</label>
+              <input
+                type="file"
+                class="form-control"
+                id="imageUrl"
+                name="imageUrl"
+                accept="image/*"
+                required
+              />
+            </div>
+            <input
+              type="hidden"
+              name="itemId"
+              id="itemId"
+              value="<%= itemId %>"
+            />
+            <button type="submit" class="btn btn-primary">Save</button>
+          </form>
+        </div>
+        <div class="col-md-7">
+          <div class="table-responsive">
+            <table
+              class="table table-bordered"
+              id="dataTable"
+              width="100%"
+              cellspacing="0"
+            >
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Name</th>
+                  <th>Quantity</th>
+                  <th>Image</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for( let index = 0; index < features.length; index++ ) { %>
+                <tr>
+                  <td><%= index + 1 %></td>
+                  <td><%= features[index].name %></td>
+                  <td><%= features[index].qty %></td>
+                  <td>
+                    <img
+                      src="http://localhost:3001/uploads/<%= features[index].imageUrl %>"
+                      alt="Feature"
+                      style="width: 30px"
+                    />
+                  </td>
+                  <td>
+                    <div class="row" style="padding-left: 6px">
+                      <button
+                        data-toggle="modal"
+                        data-target="#editModal"
+                        id="btnEditModal"
+                        type="button"
+                        class="btn btn-warning btn-sm mr-1"
+                        data-id="<%= features[index]._id %>"
+                        data-name="<%= features[index].name %>"
+                        data-qty="<%= features[index].qty %>"
+                      >
+                        <i class="fas fa-pencil-alt"></i>
+                      </button>
+                      <form
+                        action="/item/show-detail-item/<%= itemId %>/destroy/<%= features[index]._id %>?_method=DELETE"
+                        method="POST"
+                      >
+                        <button class="btn btn-danger btn-sm">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </form>
+                    </div>
+                  </td>
+                </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,5 @@
 const Bank = require("../../model/Bank");
+const Image = require("../../model/Image");
 
 const path = require("path");
 const fs = require("fs");
@@ -60,6 +61,10 @@ module.exports = {
               bankAccountName,
               imageUrl: fileName,
             });
+
+            await Image.create({
+              imageUrl: fileName,
+            });
             req.flash("alertStatus", "success");
             req.flash("alertMessage", "Bank successfully added");
 
@@ -118,6 +123,11 @@ module.exports = {
             if (fs.existsSync(currentImage)) {
               fs.unlinkSync(currentImage);
             }
+
+            await Image.findOneAndUpdate(
+              { imageUrl: bank.imageUrl },
+              { imageUrl: fileName }
+            );
 
             await Bank.findOneAndUpdate(
               { _id: id },
