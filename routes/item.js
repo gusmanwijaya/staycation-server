@@ -14,6 +14,9 @@ const {
   storeFeature,
   updateFeature,
   destroyFeature,
+  storeActivity,
+  updateActivity,
+  destroyActivity,
 } = require("../controller/admin/ItemController");
 
 router.get("/", index);
@@ -38,5 +41,19 @@ router.put(
   updateFeature
 );
 router.delete("/show-detail-item/:itemId/destroy/:id", destroyFeature);
+router.post(
+  "/store/activity",
+  multer({ dest: os.tmpdir() }).single("imageUrl"),
+  storeActivity
+);
+router.put(
+  "/show-detail-item/:itemId/update-activity",
+  multer({ dest: os.tmpdir() }).single("imageUrlInModalActivity"),
+  updateActivity
+);
+router.delete(
+  "/show-detail-item/:itemId/destroy-activity/:id",
+  destroyActivity
+);
 
 module.exports = router;

@@ -2,6 +2,7 @@ const Category = require("../../model/Category");
 const Item = require("../../model/Item");
 const Image = require("../../model/Image");
 const Feature = require("../../model/Feature");
+const Activity = require("../../model/Activity");
 const fs = require("fs");
 const path = require("path");
 const config = require("../../config");
@@ -347,6 +348,8 @@ module.exports = {
       };
 
       const features = await Feature.find({ itemId: itemId });
+      const activities = await Activity.find({ itemId: itemId });
+      console.log("activity : ", activities);
 
       res.render("admin/item/detail-item/view_detail_item", {
         title: "Detail Item",
@@ -354,6 +357,7 @@ module.exports = {
         url: originalUrl[1],
         itemId,
         features,
+        activities,
       });
     } catch (error) {
       req.flash("alertStatus", "danger");
@@ -402,17 +406,17 @@ module.exports = {
           await Image.create({
             imageUrl: fileName,
           });
+
+          req.flash("alertStatus", "success");
+          req.flash("alertMessage", "Feature successfully added");
+
+          res.redirect(`/item/show-detail-item/${itemId}`);
         } catch (err) {
           req.flash("alertStatus", "danger");
           req.flash("alertMessage", `${err.message}`);
           res.redirect(`/item/show-detail-item/${itemId}`);
         }
       });
-
-      req.flash("alertStatus", "success");
-      req.flash("alertMessage", "Feature successfully added");
-
-      res.redirect(`/item/show-detail-item/${itemId}`);
     } catch (error) {
       req.flash("alertStatus", "danger");
       req.flash("alertMessage", `${error.message}`);
@@ -508,6 +512,164 @@ module.exports = {
 
       req.flash("alertStatus", "success");
       req.flash("alertMessage", "Feature successfully deleted");
+
+      res.redirect(`/item/show-detail-item/${itemId}`);
+    } catch (error) {
+      req.flash("alertStatus", "danger");
+      req.flash("alertMessage", `${error.message}`);
+      res.redirect(`/item/show-detail-item/${itemId}`);
+    }
+  },
+  storeActivity: async (req, res) => {
+    const { name, type, itemId } = req.body;
+
+    try {
+      if (!req.file) {
+        req.flash("alertStatus", "danger");
+        req.flash("alertMessage", `${error.message}`);
+        res.redirect(`/item/show-detail-item/${itemId}`);
+      }
+
+      const filePath = req.file.path;
+      const originalExtension =
+        req.file.originalname.split(".")[
+          req.file.originalname.split(".").length - 1
+        ];
+      const fileName = req.file.filename + "." + originalExtension;
+      const targetPath = path.resolve(
+        config.rootPath,
+        `public/uploads/${fileName}`
+      );
+
+      const src = fs.createReadStream(filePath);
+      const dest = fs.createWriteStream(targetPath);
+
+      src.pipe(dest);
+
+      src.on("end", async () => {
+        try {
+          const activity = await Activity.create({
+            itemId,
+            name,
+            type,
+            imageUrl: fileName,
+          });
+          const item = await Item.findOne({ _id: itemId });
+          item.activityId.push({ _id: activity._id });
+          await item.save();
+
+          await Image.create({
+            imageUrl: fileName,
+          });
+
+          req.flash("alertStatus", "success");
+          req.flash("alertMessage", "Activity successfully added");
+
+          res.redirect(`/item/show-detail-item/${itemId}`);
+        } catch (err) {
+          req.flash("alertStatus", "danger");
+          req.flash("alertMessage", `${err.message}`);
+          res.redirect(`/item/show-detail-item/${itemId}`);
+        }
+      });
+    } catch (error) {
+      req.flash("alertStatus", "danger");
+      req.flash("alertMessage", `${error.message}`);
+      res.redirect(`/item/show-detail-item/${itemId}`);
+    }
+  },
+  updateActivity: async (req, res) => {
+    const { itemId } = req.params;
+
+    try {
+      const { idActivity, nameInModalActivity, typeInModalActivity } = req.body;
+
+      if (req.file) {
+        const filePath = req.file.path;
+        const originalExtension =
+          req.file.originalname.split(".")[
+            req.file.originalname.split(".").length - 1
+          ];
+        const fileName = req.file.filename + "." + originalExtension;
+        const targetPath = path.resolve(
+          config.rootPath,
+          `public/uploads/${fileName}`
+        );
+
+        const src = fs.createReadStream(filePath);
+        const dest = fs.createWriteStream(targetPath);
+
+        src.pipe(dest);
+
+        src.on("end", async () => {
+          try {
+            const activity = await Activity.findOne({ _id: idActivity });
+
+            let currentImage = `${config.rootPath}/public/uploads/${activity.imageUrl}`;
+
+            if (fs.existsSync(currentImage)) {
+              fs.unlinkSync(currentImage);
+            }
+
+            await Image.findOneAndUpdate(
+              { imageUrl: activity.imageUrl },
+              { imageUrl: fileName }
+            );
+            await Activity.findOneAndUpdate(
+              { _id: idActivity },
+              {
+                name: nameInModalActivity,
+                type: typeInModalActivity,
+                imageUrl: fileName,
+              }
+            );
+
+            req.flash("alertStatus", "success");
+            req.flash("alertMessage", "Activity successfully updated");
+
+            res.redirect(`/item/show-detail-item/${itemId}`);
+          } catch (error) {
+            req.flash("alertStatus", "danger");
+            req.flash("alertMessage", `${error.message}`);
+            res.redirect(`/item/show-detail-item/${itemId}`);
+          }
+        });
+      } else {
+        await Activity.findOneAndUpdate(
+          { _id: idActivity },
+          { name: nameInModalActivity, type: typeInModalActivity }
+        );
+        req.flash("alertStatus", "success");
+        req.flash("alertMessage", "Activity successfully updated");
+
+        res.redirect(`/item/show-detail-item/${itemId}`);
+      }
+    } catch (error) {
+      req.flash("alertStatus", "danger");
+      req.flash("alertMessage", `${error.message}`);
+      res.redirect(`/item/show-detail-item/${itemId}`);
+    }
+  },
+  destroyActivity: async (req, res) => {
+    const { itemId } = req.params;
+    try {
+      const { id } = req.params;
+      const activity = await Activity.findOne({ _id: id });
+      let currentImage = `${config.rootPath}/public/uploads/${activity.imageUrl}`;
+      if (fs.existsSync(currentImage)) {
+        fs.unlinkSync(currentImage);
+      }
+
+      await Image.findOneAndDelete({ imageUrl: activity.imageUrl });
+
+      await Activity.findOneAndDelete({ _id: id });
+
+      const item = await Item.findOne({ _id: itemId });
+      item.activityId.pop();
+      await item.save();
+
+      req.flash("alertStatus", "success");
+      req.flash("alertMessage", "Activity successfully deleted");
 
       res.redirect(`/item/show-detail-item/${itemId}`);
     } catch (error) {

@@ -6,9 +6,9 @@ const activitySchema = new mongoose.Schema(
       type: String,
       required: [true, "Activity name is required"],
     },
-    qty: {
-      type: Number,
-      required: [true, "Activity quantity is required"],
+    type: {
+      type: String,
+      required: [true, "Activity type is required"],
     },
     imageUrl: {
       type: String,

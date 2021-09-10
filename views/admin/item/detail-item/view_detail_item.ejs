@@ -71,8 +71,9 @@
       <i class="fas fa-angle-up"></i>
     </a>
 
-    <% include ./edit_modal.ejs %> <% include ../../../partials/logoutModal.ejs
-    %> <% include ../../../partials/script.ejs %>
+    <% include ./edit_modal.ejs %> <% include ./edit_modal_activity.ejs %> <%
+    include ../../../partials/logoutModal.ejs %> <% include
+    ../../../partials/script.ejs %>
 
     <script>
       $("#dataTable").on("click", "#btnEditModal", function () {
@@ -84,6 +85,19 @@
         $("#id").val(id);
         $("#nameInModal").val(name);
         $("#qtyInModal").val(qty);
+      });
+    </script>
+
+    <script>
+      $("#dataTableActivity").on("click", "#btnEditModalActivity", function () {
+        let id = $(this).data("id");
+        let name = $(this).data("name");
+        let type = $(this).data("type");
+
+        $("#editModalActivity").modal("show");
+        $("#idActivity").val(id);
+        $("#nameInModalActivity").val(name);
+        $("#typeInModalActivity").val(type);
       });
     </script>
 
