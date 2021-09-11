@@ -12,6 +12,7 @@ const itemSchema = new mongoose.Schema(
     },
     sumBooking: {
       type: Number,
+      default: 0,
     },
     country: {
       type: String,
@@ -31,6 +32,7 @@ const itemSchema = new mongoose.Schema(
     },
     unit: {
       type: String,
+      default: "per night",
     },
     categoryId: {
       type: mongoose.Schema.Types.ObjectId,

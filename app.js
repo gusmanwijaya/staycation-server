@@ -21,6 +21,9 @@ const itemRouter = require("./routes/item");
 const bookingRouter = require("./routes/booking");
 const userRouter = require("./routes/user");
 
+// API
+const apiRouter = require("./routes/api");
+
 const { isLogin } = require("./middlewares/auth");
 
 const app = express();
@@ -59,6 +62,9 @@ app.use("/category", isLogin, categoryRouter);
 app.use("/bank", isLogin, bankRouter);
 app.use("/item", isLogin, itemRouter);
 app.use("/booking", isLogin, bookingRouter);
+
+// API
+app.use("/api/member", apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
