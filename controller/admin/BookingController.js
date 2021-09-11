@@ -1,3 +1,7 @@
+const Booking = require("../../model/Booking");
+const Member = require("../../model/Member");
+const Bank = require("../../model/Bank");
+
 module.exports = {
   index: async (req, res) => {
     try {
@@ -11,10 +15,16 @@ module.exports = {
         message: alertMessage,
       };
 
+      const booking = await Booking.find()
+        .populate("memberId")
+        .populate("bankId");
+
       res.render("admin/booking/view_booking", {
+        username: req.session.user.username,
         title: "Booking",
         url: originalUrl[1],
         alert,
+        booking,
       });
     } catch (error) {
       req.flash("alertStatus", "danger");

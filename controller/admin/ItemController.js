@@ -26,6 +26,7 @@ module.exports = {
         .populate("categoryId", "_id name");
 
       res.render("admin/item/view_item", {
+        username: req.session.user.username,
         title: "Item",
         url: originalUrl[1],
         alert,
@@ -123,6 +124,7 @@ module.exports = {
       );
 
       res.render("admin/item/view_item", {
+        username: req.session.user.username,
         title: "Show Item",
         alert,
         item,
@@ -155,6 +157,7 @@ module.exports = {
       const categories = await Category.find();
 
       res.render("admin/item/view_item", {
+        username: req.session.user.username,
         title: "Edit Item",
         alert,
         item,
@@ -352,6 +355,7 @@ module.exports = {
       console.log("activity : ", activities);
 
       res.render("admin/item/detail-item/view_detail_item", {
+        username: req.session.user.username,
         title: "Detail Item",
         alert,
         url: originalUrl[1],

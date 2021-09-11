@@ -10,6 +10,9 @@ const itemSchema = new mongoose.Schema(
       type: Number,
       required: [true, "Item price is required"],
     },
+    sumBooking: {
+      type: Number,
+    },
     country: {
       type: String,
       required: [true, "Item country is required"],
@@ -25,6 +28,9 @@ const itemSchema = new mongoose.Schema(
     description: {
       type: String,
       required: [true, "Item description is required"],
+    },
+    unit: {
+      type: String,
     },
     categoryId: {
       type: mongoose.Schema.Types.ObjectId,

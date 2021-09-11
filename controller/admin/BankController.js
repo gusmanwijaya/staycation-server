@@ -21,6 +21,7 @@ module.exports = {
       const banks = await Bank.find();
 
       res.render("admin/bank/view_bank", {
+        username: req.session.user.username,
         title: "Bank",
         url: originalUrl[1],
         alert,

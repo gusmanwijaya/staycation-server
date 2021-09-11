@@ -16,6 +16,7 @@ module.exports = {
       const categories = await Category.find();
 
       res.render("admin/category/view_category", {
+        username: req.session.user.username,
         title: "Category",
         url: originalUrl[1],
         alert,

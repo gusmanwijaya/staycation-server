@@ -4,6 +4,11 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 
+// Connect to mongodb
+const { urlDb } = require("./config");
+const mongoose = require("mongoose");
+mongoose.connect(urlDb);
+
 // Install package
 const methodOverride = require("method-override");
 const session = require("express-session");
@@ -14,6 +19,9 @@ const categoryRouter = require("./routes/category");
 const bankRouter = require("./routes/bank");
 const itemRouter = require("./routes/item");
 const bookingRouter = require("./routes/booking");
+const userRouter = require("./routes/user");
+
+const { isLogin } = require("./middlewares/auth");
 
 const app = express();
 
@@ -45,11 +53,12 @@ app.use(
   express.static(path.join(__dirname, `node_modules/startbootstrap-sb-admin-2`))
 );
 
-app.use("/dashboard", dashboardRouter);
-app.use("/category", categoryRouter);
-app.use("/bank", bankRouter);
-app.use("/item", itemRouter);
-app.use("/booking", bookingRouter);
+app.use("/", userRouter);
+app.use("/dashboard", isLogin, dashboardRouter);
+app.use("/category", isLogin, categoryRouter);
+app.use("/bank", isLogin, bankRouter);
+app.use("/item", isLogin, itemRouter);
+app.use("/booking", isLogin, bookingRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -10,54 +10,62 @@ const bookingSchema = new mongoose.Schema(
       type: Date,
       required: [true, "Booking end date is required"],
     },
-    proofPayment: {
-      type: String,
-      required: [true, "Booking proof payment is required"],
+    invoice: {
+      type: Number,
+      required: [true, "Booking invoice is required"],
     },
-    fromBank: {
-      type: String,
-      required: [true, "Booking from bank is required"],
-    },
-    accountHolder: {
-      type: String,
-      required: [true, "Booking account holder is required"],
+    payments: {
+      proofPayment: {
+        type: String,
+        required: [true, "Booking proof payment is required"],
+      },
+      bankFrom: {
+        type: String,
+        required: [true, "Booking from bank is required"],
+      },
+      accountHolder: {
+        type: String,
+        required: [true, "Booking account holder is required"],
+      },
+      status: {
+        type: String,
+        required: [true, "Booking status is required"],
+      },
     },
     imageUrl: {
       type: String,
       required: [true, "Booking image is required"],
     },
-    status: {
-      type: String,
-      required: [true, "Booking status is required"],
+    itemId: {
+      _id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Item",
+      },
+      title: {
+        type: String,
+        required: [true, "Booking item title is required"],
+      },
+      price: {
+        type: Number,
+        required: [true, "Booking item price is required"],
+      },
+      duration: {
+        type: Number,
+        required: [true, "Booking item duration is required"],
+      },
     },
-    itemId: [
-      {
-        _id: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Item",
-        },
-        price: {
-          type: Number,
-          required: [true, "Booking item price is required"],
-        },
-        perNight: {
-          type: Number,
-          required: [true, "Booking item per night is required"],
-        },
-      },
-    ],
-    memberId: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Member",
-      },
-    ],
-    bankId: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Bank",
-      },
-    ],
+    total: {
+      type: Number,
+      required: [true, "Booking item total is required"],
+    },
+    memberId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Member",
+    },
+    bankId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Bank",
+    },
   },
   {
     timestamps: {

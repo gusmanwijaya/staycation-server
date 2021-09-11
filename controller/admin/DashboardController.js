@@ -12,6 +12,7 @@ module.exports = {
       };
 
       res.render("admin/dashboard/view_dashboard", {
+        username: req.session.user.username,
         title: "Dashboard",
         url: originalUrl[1],
         alert,
