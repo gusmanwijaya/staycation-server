@@ -27,9 +27,9 @@
           <tr>
             <td><%= index + 1 %></td>
             <td>
-              <%= booking[index].bookingStartDate.toLocalString().split(",")[0]
+              <%= booking[index].bookingStartDate.toLocaleString().split(",")[0]
               %> s/d <%=
-              booking[index].bookingEndDate.toLocalString().split(",")[0] %>
+              booking[index].bookingEndDate.toLocaleString().split(",")[0] %>
             </td>
             <td><%= booking[index].itemId.title %></td>
             <td>
@@ -39,26 +39,11 @@
             <td><%= booking[index].bankId.bankName %></td>
             <td><%= booking[index].payments.status %></td>
             <td>
-              <div class="row" style="padding-left: 6px">
-                <button
-                  data-toggle="modal"
-                  data-target="#editModal"
-                  id="btnEditModal"
-                  type="button"
-                  class="btn btn-warning btn-sm mr-1"
-                  data-id="<%= booking[index]._id %>"
-                >
-                  <i class="fas fa-pencil-alt"></i>
-                </button>
-                <form
-                  action="/booking/destroy/<%= booking[index]._id %>?_method=DELETE"
-                  method="POST"
-                >
-                  <button class="btn btn-danger btn-sm">
-                    <i class="fas fa-trash"></i>
-                  </button>
-                </form>
-              </div>
+              <a
+                href="/booking/<%= booking[index]._id %>"
+                class="btn btn-success btn-sm mr-1"
+                ><i class="fas fa-eye"></i
+              ></a>
             </td>
           </tr>
           <% } %>

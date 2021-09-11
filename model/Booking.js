@@ -34,7 +34,6 @@ const bookingSchema = new mongoose.Schema(
     },
     imageUrl: {
       type: String,
-      required: [true, "Booking image is required"],
     },
     itemId: {
       _id: {
