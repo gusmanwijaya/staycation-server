@@ -1,0 +1,79 @@
+[{
+  "_id": {
+    "$oid": "613c81bfb74775a6414331ea"
+  },
+  "title": "Apartmen Wijaya",
+  "price": 250000,
+  "country": "Indonesia",
+  "city": "Bengkulu",
+  "isPopular": true,
+  "description": "<p>Description for Apartmen Wijaya</p>",
+  "categoryId": {
+    "$oid": "613c7ebdbc409978d7fc4008"
+  },
+  "imageId": [
+    {
+      "$oid": "613c81bfb74775a6414331ed"
+    },
+    {
+      "$oid": "613c81bfb74775a6414331ef"
+    },
+    {
+      "$oid": "613c81bfb74775a6414331f3"
+    }
+  ],
+  "featureId": [
+    {
+      "$oid": "613c8282b74775a641433205"
+    }
+  ],
+  "activityId": [
+    {
+      "$oid": "613c829bb74775a64143320d"
+    }
+  ],
+  "created_at": {
+    "$date": "2021-09-11T10:15:27.291Z"
+  },
+  "updated_at": {
+    "$date": "2022-02-18T14:24:35.745Z"
+  },
+  "__v": 4,
+  "unit": "per night",
+  "sumBooking": 2
+},{
+  "_id": {
+    "$oid": "613c82ccb74775a64143321a"
+  },
+  "title": "Hotel Wijaya",
+  "price": 350000,
+  "country": "Indonesia",
+  "city": "Manna",
+  "isPopular": true,
+  "description": "<p>Hotel Wijaya</p>",
+  "categoryId": {
+    "$oid": "613c7ec7bc409978d7fc400b"
+  },
+  "imageId": [
+    {
+      "$oid": "613c82ccb74775a64143321d"
+    },
+    {
+      "$oid": "613c82ccb74775a64143321f"
+    },
+    {
+      "$oid": "613c82ccb74775a641433224"
+    }
+  ],
+  "featureId": [],
+  "activityId": [],
+  "created_at": {
+    "$date": "2021-09-11T10:19:56.725Z"
+  },
+  "updated_at": {
+    "$date": "2022-02-18T14:24:35.753Z"
+  },
+  "__v": 2,
+  "unit": "per night",
+  "sumBooking": 7
+}]

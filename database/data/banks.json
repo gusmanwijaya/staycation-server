@@ -1,0 +1,31 @@
+[{
+  "_id": {
+    "$oid": "613c7f03bc409978d7fc400f"
+  },
+  "bankName": "BCA",
+  "bankAccountNumber": "1234567890",
+  "bankAccountName": "PT Staycation Indonesia",
+  "imageUrl": "4de8334adf55959f79e616550c74e071.png",
+  "created_at": {
+    "$date": "2021-09-11T10:03:47.709Z"
+  },
+  "updated_at": {
+    "$date": "2021-09-11T10:03:47.709Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "613c7f22bc409978d7fc4014"
+  },
+  "bankName": "Mandiri",
+  "bankAccountNumber": "0987654321",
+  "bankAccountName": "PT Staycation Indonesia",
+  "imageUrl": "9fbb14a1b114e7125b22764aaa16e280.png",
+  "created_at": {
+    "$date": "2021-09-11T10:04:18.250Z"
+  },
+  "updated_at": {
+    "$date": "2021-09-11T10:04:18.250Z"
+  },
+  "__v": 0
+}]

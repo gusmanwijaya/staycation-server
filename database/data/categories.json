@@ -1,0 +1,35 @@
+[{
+  "_id": {
+    "$oid": "613c7ebdbc409978d7fc4008"
+  },
+  "name": "Apartment With Kitchen",
+  "itemId": [
+    {
+      "$oid": "613c81bfb74775a6414331ea"
+    }
+  ],
+  "created_at": {
+    "$date": "2021-09-11T10:02:37.927Z"
+  },
+  "updated_at": {
+    "$date": "2021-09-11T10:15:27.298Z"
+  },
+  "__v": 1
+},{
+  "_id": {
+    "$oid": "613c7ec7bc409978d7fc400b"
+  },
+  "name": "Hotel With Swimming Pool",
+  "itemId": [
+    {
+      "$oid": "613c82ccb74775a64143321a"
+    }
+  ],
+  "created_at": {
+    "$date": "2021-09-11T10:02:47.002Z"
+  },
+  "updated_at": {
+    "$date": "2021-09-11T10:19:56.727Z"
+  },
+  "__v": 2
+}]

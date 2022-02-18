@@ -1,0 +1,19 @@
+[{
+  "_id": {
+    "$oid": "613c829bb74775a64143320d"
+  },
+  "name": "Apartment Jaya",
+  "type": "Apartment",
+  "imageUrl": "036fc878895aabb7d0ddc72ce22be71c.png",
+  "isPopular": false,
+  "itemId": {
+    "$oid": "613c81bfb74775a6414331ea"
+  },
+  "created_at": {
+    "$date": "2021-09-11T10:19:07.413Z"
+  },
+  "updated_at": {
+    "$date": "2021-09-11T10:19:07.413Z"
+  },
+  "__v": 0
+}]

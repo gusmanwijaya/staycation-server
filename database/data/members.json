@@ -1,0 +1,54 @@
+[{
+  "_id": {
+    "$oid": "613cb673ec0f21f0617e5afd"
+  },
+  "firstName": "Gusman",
+  "lastName": "Wijaya",
+  "email": "gusman.w.jaya@gmail.com",
+  "phoneNumber": "081312397308"
+},{
+  "_id": {
+    "$oid": "620fa7831680569877ecb9b2"
+  },
+  "firstName": "Otong",
+  "lastName": "Markotong",
+  "email": "otong@gmail.com",
+  "phoneNumber": "081212345678",
+  "created_at": {
+    "$date": "2022-02-18T14:04:51.348Z"
+  },
+  "updated_at": {
+    "$date": "2022-02-18T14:04:51.348Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "620fa7d21680569877ecb9b7"
+  },
+  "firstName": "Otong",
+  "lastName": "Markotong",
+  "email": "otong@gmail.com",
+  "phoneNumber": "081212345678",
+  "created_at": {
+    "$date": "2022-02-18T14:06:10.906Z"
+  },
+  "updated_at": {
+    "$date": "2022-02-18T14:06:10.906Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "620fa86e1680569877ecb9bd"
+  },
+  "firstName": "Otong",
+  "lastName": "Markotong",
+  "email": "otong@gmail.com",
+  "phoneNumber": "081212345678",
+  "created_at": {
+    "$date": "2022-02-18T14:08:46.560Z"
+  },
+  "updated_at": {
+    "$date": "2022-02-18T14:08:46.560Z"
+  },
+  "__v": 0
+}]

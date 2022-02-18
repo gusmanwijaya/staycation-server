@@ -1,0 +1,18 @@
+[{
+  "_id": {
+    "$oid": "613c8282b74775a641433205"
+  },
+  "name": "Bedroom",
+  "qty": 3,
+  "imageUrl": "78b3174b3f51913dde0b59478b0deeff.png",
+  "itemId": {
+    "$oid": "613c81bfb74775a6414331ea"
+  },
+  "created_at": {
+    "$date": "2021-09-11T10:18:42.203Z"
+  },
+  "updated_at": {
+    "$date": "2021-09-11T10:18:42.203Z"
+  },
+  "__v": 0
+}]

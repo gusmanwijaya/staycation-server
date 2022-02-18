@@ -1,0 +1,72 @@
+[{
+  "_id": {
+    "$oid": "613caf9eec0f21f0617e5ace"
+  },
+  "bookingStartDate": {
+    "$date": "2021-09-10T17:00:00Z"
+  },
+  "bookingEndDate": {
+    "$date": "2021-09-12T17:00:00Z"
+  },
+  "invoice": 1231231,
+  "itemId": {
+    "_id": {
+      "$oid": "613c82ccb74775a64143321a"
+    },
+    "title": "Hotel Wijaya",
+    "price": 250000,
+    "duration": 2
+  },
+  "total": 500000,
+  "memberId": {
+    "$oid": "613cb673ec0f21f0617e5afd"
+  },
+  "bankId": {
+    "$oid": "613c7f03bc409978d7fc400f"
+  },
+  "payments": {
+    "proofPayment": "uploads/f06529ad187af72311ecd4f93b9b5fb6.jpg",
+    "bankFrom": "BCA",
+    "status": "pending",
+    "accountHolder": "ang"
+  },
+  "updated_at": {
+    "$date": "2021-09-11T15:43:18.337Z"
+  }
+},{
+  "_id": {
+    "$oid": "620fa86e1680569877ecb9bf"
+  },
+  "bookingStartDate": {
+    "$date": "2022-02-18T17:00:00Z"
+  },
+  "bookingEndDate": {
+    "$date": "2022-02-22T17:00:00Z"
+  },
+  "invoice": 5674079,
+  "payments": {
+    "proofPayment": "uploads/f06529ad187af72311ecd4f93b9b5fb6.jpg",
+    "bankFrom": "BCA",
+    "accountHolder": "123456",
+    "status": "pending"
+  },
+  "itemId": {
+    "_id": {
+      "$oid": "613c82ccb74775a64143321a"
+    },
+    "title": "Hotel Wijaya",
+    "price": 350000,
+    "duration": 4
+  },
+  "total": 1540000,
+  "memberId": {
+    "$oid": "620fa86e1680569877ecb9bd"
+  },
+  "created_at": {
+    "$date": "2022-02-18T14:08:46.567Z"
+  },
+  "updated_at": {
+    "$date": "2022-02-18T14:08:46.567Z"
+  },
+  "__v": 0
+}]
