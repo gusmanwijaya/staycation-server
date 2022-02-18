@@ -3,6 +3,12 @@ const Treasure = require("../../model/Activity");
 const Traveler = require("../../model/Booking");
 const Category = require("../../model/Category");
 const Bank = require("../../model/Bank");
+const Member = require("../../model/Member");
+const Booking = require("../../model/Booking");
+
+const config = require("../../config");
+const path = require("path");
+const fs = require("fs");
 
 module.exports = {
   landingPage: async (req, res) => {
@@ -113,6 +119,118 @@ module.exports = {
         bank,
         testimonial,
       });
+    } catch (error) {
+      res.status(500).json({
+        status: "error",
+        message: error.message || "500 - Internal server error",
+      });
+    }
+  },
+  bookingPage: async (req, res) => {
+    try {
+      const {
+        idItem,
+        duration,
+        price,
+        bookingStartDate,
+        bookingEndDate,
+        firstName,
+        lastName,
+        email,
+        phoneNumber,
+        accountHolder,
+        bankFrom,
+      } = req.body;
+
+      if (!req.file) {
+        res.status(400).json({
+          status: "error",
+          message: "Silahkan upload image!",
+        });
+      } else {
+        const filePath = req.file.path;
+        const originalExtension =
+          req.file.originalname.split(".")[
+            req.file.originalname.split(".").length - 1
+          ];
+        const fileName = req.file.filename + "." + originalExtension;
+        const targetPath = path.resolve(
+          config.rootPath,
+          `public/uploads/${fileName}`
+        );
+
+        const src = fs.createReadStream(filePath);
+        const dest = fs.createWriteStream(targetPath);
+
+        src.pipe(dest);
+        src.on("end", async () => {
+          if (
+            idItem === undefined ||
+            duration === undefined ||
+            price === undefined ||
+            bookingStartDate === undefined ||
+            bookingEndDate === undefined ||
+            firstName === undefined ||
+            lastName === undefined ||
+            email === undefined ||
+            phoneNumber === undefined ||
+            accountHolder === undefined ||
+            bankFrom === undefined
+          ) {
+            res.status(400).json({
+              status: "error",
+              message: "Silahkan lengkapi field yang masih kosong!",
+            });
+          } else {
+            const item = await Item.findOne({ _id: idItem });
+            if (!item) {
+              res.status(404).json({
+                status: "error",
+                message: "Id item tidak tersedia!",
+              });
+            } else {
+              item.sumBooking += 1;
+              await item.save();
+
+              let total = item.price * duration;
+              let tax = (total * 10) / 100;
+              const invoice = Math.floor(1000000 + Math.random() * 9000000);
+
+              const member = await Member.create({
+                firstName,
+                lastName,
+                email,
+                phoneNumber,
+              });
+
+              const newBooking = {
+                invoice,
+                bookingStartDate,
+                bookingEndDate,
+                total: (total += tax),
+                itemId: {
+                  _id: item._id,
+                  title: item.title,
+                  price: item.price,
+                  duration,
+                },
+                memberId: member._id,
+                payments: {
+                  proofPayment: `uploads/${fileName}`,
+                  bankFrom,
+                  accountHolder,
+                },
+              };
+
+              const booking = await Booking.create(newBooking);
+              res.status(201).json({
+                status: "success",
+                data: booking,
+              });
+            }
+          }
+        });
+      }
     } catch (error) {
       res.status(500).json({
         status: "error",
