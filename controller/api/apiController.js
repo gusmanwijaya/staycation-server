@@ -94,6 +94,10 @@ module.exports = {
           populate: {
             path: "itemId",
             model: "Item",
+            populate: {
+              path: "imageId",
+              select: "_id imageUrl",
+            },
           },
         })
         .populate({
