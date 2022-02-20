@@ -89,18 +89,6 @@ module.exports = {
       const { id } = req.params;
       const item = await Item.findOne({ _id: id })
         .populate({
-          path: "categoryId",
-          select: "_id name itemId",
-          populate: {
-            path: "itemId",
-            model: "Item",
-            populate: {
-              path: "imageId",
-              select: "_id imageUrl",
-            },
-          },
-        })
-        .populate({
           path: "featureId",
           select: "_id name qty imageUrl",
         })
