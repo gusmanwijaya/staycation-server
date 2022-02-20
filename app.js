@@ -13,6 +13,7 @@ mongoose.connect(urlDb);
 const methodOverride = require("method-override");
 const session = require("express-session");
 const flash = require("connect-flash");
+const cors = require("cors");
 
 const dashboardRouter = require("./routes/dashboard");
 const categoryRouter = require("./routes/category");
@@ -27,6 +28,8 @@ const apiRouter = require("./routes/api");
 const { isLogin } = require("./middlewares/auth");
 
 const app = express();
+
+app.use(cors());
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
