@@ -93,8 +93,7 @@ module.exports = {
           select: "_id name itemId",
           populate: {
             path: "itemId",
-            select:
-              "_id title price country city isPopular description sumBooking unit",
+            model: "Item",
           },
         })
         .populate({
